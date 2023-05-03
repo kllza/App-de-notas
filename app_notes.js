@@ -1,7 +1,7 @@
 let input_text = document.getElementById("input_text");
 let add_btn = document.getElementById("add_button");
 let div_notes = document.getElementById("div_notes");
-let notes = JSON.parse(localStorage.getItem("div_notes")) || []; // cargar las notas guardadas en localStorage
+let notes = JSON.parse(localStorage.getItem("div_notes")) || [];
 
 saveNotes = () => {
   localStorage.setItem("div_notes", JSON.stringify(notes));
@@ -15,7 +15,7 @@ add_btn.addEventListener("click", () => {
   let note_id = Date.now();
   let add_notes = document.createElement("div");
   let note_text = document.createElement("p");
-  let buttons_container = document.createElement("div"); // nuevo div
+  let buttons_container = document.createElement("div");
 
   let note_txt = {
     id: note_id,
@@ -28,7 +28,6 @@ add_btn.addEventListener("click", () => {
   add_notes.appendChild(note_text);
   add_notes.appendChild(buttons_container);
 
-  // agregar los botones al nuevo div "buttons-container"
   buttons_container.classList.add("buttons-container");
 
   let button_edit = document.createElement("button");
@@ -55,19 +54,15 @@ add_btn.addEventListener("click", () => {
   button_edit.addEventListener("click", () => {
     console.log("editCLikc");
 
-    // crear el textarea para editar la nota
     note_edit_text = document.createElement("textarea");
     note_edit_text.classList.add("note-edit-text");
     note_edit_text.value = value_text;
 
-    // reemplazar el texto con el textarea
     add_notes.replaceChild(note_edit_text, note_text);
 
-    // ocultar los botones delete y edit mientras se edita la nota
     button_delete.style.display = "none";
     button_edit.style.display = "none";
 
-    // mostrar los botones de guardar y cancelar
     let button_save = document.createElement("button");
     let button_cancel = document.createElement("button");
     button_save.classList.add("btn-save");
@@ -77,7 +72,6 @@ add_btn.addEventListener("click", () => {
     buttons_container.appendChild(button_save);
     buttons_container.appendChild(button_cancel);
 
-    // al hacer click en cancelar, volver a mostrar el texto original y los botones delete y edit
     button_cancel.addEventListener("click", () => {
       add_notes.replaceChild(note_text, note_edit_text);
       button_delete.style.display = "inline-block";
@@ -86,7 +80,6 @@ add_btn.addEventListener("click", () => {
       button_cancel.remove();
     });
 
-    // al hacer click en guardar, actualizar la nota y mostrar el texto y los botones delete y edit
     button_save.addEventListener("click", () => {
       let updated_text = note_edit_text.value;
       note_text.innerHTML = updated_text;
@@ -110,21 +103,17 @@ editNote = (note_id) => {
   let note_text = add_notes.querySelector("p");
   let buttons_container = add_notes.querySelector("div.buttons-container");
 
-  // crear el textarea para editar la nota
   let note_edit_text = document.createElement("textarea");
   note_edit_text.classList.add("note-edit-text");
   note_edit_text.value = note_text.innerHTML;
 
-  // reemplazar el texto con el textarea
   add_notes.replaceChild(note_edit_text, note_text);
 
-  // ocultar los botones delete y edit mientras se edita la nota
   let button_delete = buttons_container.querySelector(".btn-delete");
   let button_edit = buttons_container.querySelector(".btn-edit");
   button_delete.style.display = "none";
   button_edit.style.display = "none";
 
-  // mostrar los botones de guardar y cancelar
   let button_save = document.createElement("button");
   let button_cancel = document.createElement("button");
   button_save.classList.add("btn-save");
@@ -134,7 +123,6 @@ editNote = (note_id) => {
   buttons_container.appendChild(button_save);
   buttons_container.appendChild(button_cancel);
 
-  // al hacer click en cancelar, volver a mostrar el texto original y los botones delete y edit
   button_cancel.addEventListener("click", () => {
     add_notes.replaceChild(note_text, note_edit_text);
     button_delete.style.display = "inline-block";
@@ -143,7 +131,6 @@ editNote = (note_id) => {
     button_cancel.remove();
   });
 
-  // al hacer click en guardar, actualizar la nota y mostrar el texto y los botones delete y edit
   button_save.addEventListener("click", () => {
     let updated_text = note_edit_text.value;
     note_text.innerHTML = updated_text;
@@ -171,7 +158,6 @@ loadNotes = () => {
     add_notes.appendChild(note_text);
     add_notes.appendChild(buttons_container);
 
-    // agregar los botones al nuevo div "buttons-container"
     buttons_container.classList.add("buttons-container");
 
     let button_edit = document.createElement("button");

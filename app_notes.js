@@ -3,14 +3,14 @@ let add_btn = document.getElementById("add_button");
 let div_notes = document.getElementById("div_notes");
 let notes = JSON.parse(localStorage.getItem("div_notes")) || [];
 
-saveNotes = () => {
+const saveNotes = () => {
   localStorage.setItem("div_notes", JSON.stringify(notes));
 };
 
 let note_edit_text;
 
 add_btn.addEventListener("click", () => {
-  console.log("test");
+  
   let value_text = input_text.value;
   let note_id = Date.now();
   let add_notes = document.createElement("div");
@@ -44,7 +44,6 @@ add_btn.addEventListener("click", () => {
   saveNotes();
 
   button_delete.addEventListener("click", () => {
-    console.log("delete");
     add_notes.remove();
     notes = notes.filter((note) => note.id !== note_id);
 
@@ -52,7 +51,6 @@ add_btn.addEventListener("click", () => {
   });
 
   button_edit.addEventListener("click", () => {
-    console.log("editCLikc");
 
     note_edit_text = document.createElement("textarea");
     note_edit_text.classList.add("note-edit-text");
@@ -170,14 +168,12 @@ loadNotes = () => {
     buttons_container.appendChild(button_delete);
 
     button_delete.addEventListener("click", () => {
-      console.log("delete");
       add_notes.remove();
       notes = notes.filter((note_item) => note_item.id !== note.id);
       saveNotes();
     });
 
     button_edit.addEventListener("click", () => {
-      console.log("editCLikc");
       editNote(note.id);
     });
   });
